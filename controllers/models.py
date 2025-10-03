@@ -9,6 +9,8 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable=False)
     user_name = db.Column(db.String(50), nullable=False)
 
+
+    roles = db.relationship('Role', secondary='user_role', backref='users', lazy=True)
     patients_details = db.relationship('Patient', backref='user', lazy=True, uselist=False)
     doctor_details = db.relationship('Doctor', backref='user', lazy=True, uselist=False)
 

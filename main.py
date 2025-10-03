@@ -24,6 +24,35 @@ with app.app_context():
         doctor_role = Role(name='doctor')
         db.session.add(doctor_role)
 
+    # admin_user = User.query.filter_by(user_email = 'admin@gmail.com').first()
+    # if not admin_user:
+    #     admin_user = User(
+    #         user_email = 'admin@gmail.com',
+    #         password = 'admin123',
+    #         user_name = 'Admin'
+    #     )
+    #     db.session.add(admin_user)
+    #     # print(admin_user.id)
+    #     admin_user_details = User.query.filter_by(user_email = 'admin@gmail.com').first()
+    #     admin_role = Role.query.filter_by(name='admin').first()
+
+    #     user_id = admin_user_details.user_id 
+    #     role_id = admin_role.id
+
+    #     user_role = UserRole(user_id=user_id, role_id=role_id)
+    #     db.session.add(user_role)
+
+    admin_user = User.query.filter_by(user_email = 'admin@gmail.com').first()
+    if not admin_user:
+        admin_role = Role.query.filter_by(name='admin').first()
+        admin_user = User(
+            user_email = 'admin@gmail.com',
+            password = 'admin123',
+            user_name = 'Admin',
+            roles = [admin_role]
+        )
+        db.session.add(admin_user)
+
     db.session.commit()
 @app.route('/')
 def index():
