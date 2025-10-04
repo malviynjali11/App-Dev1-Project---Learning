@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Login - Hospital Management System {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid row justify-content-center mb-5">
+    <form class="col-6" action="/login" method="post">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="emailid">
+        </div>
+
+        <div class="mb-3">
+            <label for="inputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="inputPassword" name="password">
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

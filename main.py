@@ -56,7 +56,7 @@ with app.app_context():
     db.session.commit()
 @app.route('/')
 def index():
-    return render_template('hello.html')
+    return render_template('login.html')
 
 @app.route('/about')
 def about():
