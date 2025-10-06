@@ -54,13 +54,9 @@ with app.app_context():
         db.session.add(admin_user)
 
     db.session.commit()
-@app.route('/')
-def index():
-    return render_template('login.html')
 
-@app.route('/about')
-def about():
-    return "About Page"
+from controllers.auth_routes import *
+from controllers.routes import *
 
 if __name__ == '__main__':
     app.run(debug=True)
