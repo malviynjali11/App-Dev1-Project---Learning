@@ -4,6 +4,17 @@
 
 {% block content %}
 <div class="container-fluid row justify-content-center mb-5">
-    <h1>Welcome to Hospital Management System</h1>
+    {% if not session.get('user_email', None) %}
+        <h1>Login/Register</h1>
+    {% else %}
+        {{ session.get('user_role') | list}}
+        {% if "admin" in session.get('user_role') | list %}
+            {% include 'admin_dashboard.html' %}
+        {% elif "doctor" in session.get('user_role', None) | list %}
+            {% include 'doctor_dashboard.html' %}
+        {% else %}
+            {% include 'patient_dashboard.html' %}
+        {% endif %}    
+    {% endif %}
 </div>
 {% endblock %}
