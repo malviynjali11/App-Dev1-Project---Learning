@@ -35,10 +35,13 @@ class UserRole(db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
 
 class Doctor(db.Model):
-
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
-    specialization = db.Column(db.String(100), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
+    specialization_id = db.Column(db.Integer, db.ForeignKey('specialization.id'), nullable=False)
+    experience_years = db.Column(db.Integer, nullable=False)
+
+    specialization = db.relationship('Specialization', backref='doctors', lazy=True)
+
 
 class Patient(db.Model):
 
@@ -48,3 +51,15 @@ class Patient(db.Model):
     address = db.Column(db.String(200), nullable=False)
     phone = db.Column(db.String(15), nullable=False)
     medical_history = db.Column(db.Text, nullable=True)
+
+class Specialization(db.Model):
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(50), nullable=False)
+    description = db.Column(db.String(200), nullable=True)
+
+    doctors = db.relationship('Doctor', backref='specialization', lazy=True)
+
+
+
+

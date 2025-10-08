@@ -9,17 +9,23 @@
 
       {% if not session.get('user_email', None) %}
        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Login</a>
+          <a class="nav-link active" aria-current="page" href={{ url_for('login') }}>Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
+          <a class="nav-link" href= {{ url_for('register') }}>Register</a>
         </li>
 
       {% else %}
-
-        
-
-      {% endif %}
+          {% if "admin" in session.get('user_roles') | list %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Add Doctor</a>
+          </li>
+          {% elif "doctor" in session.get('user_roles', None) %}
+          <!-- Here we will add navbar links for Doctor -->
+          {% else %}
+          <!-- Here we will add navbar links for Patient -->
+          {% endif %}
+        {% endif %}
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
